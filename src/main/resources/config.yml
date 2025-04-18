@@ -1,0 +1,14 @@
+#============================== GENERAL
+
+token: example_token
+status: ONLINE
+
+#============================== EMBEDS
+
+# Embed colors (you MUST use RGB values separated by ","):
+default: 35,35,35
+success: 116,227,121
+error: 227,93,93
+
+# Embed footers (leave blank to disable). Use {%version} to write bot's version, use {%name} to write your server's name that you set above
+footer: "%name% | v%version%"
