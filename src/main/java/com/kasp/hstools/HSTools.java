@@ -165,5 +165,6 @@ public class HSTools {
         new Car("duster", CarType.STREET, 127, 152, 116, 130, Map.of("midacc", 6));
         new Car("kaiju", CarType.STREET, 130, 151, 120, 124, Map.of("midacc", 6));
         new Car("fang", CarType.MUSCLE, 111, 132, 156, 125, Map.of("topspeed", 6));
+        new Car("spectre", CarType.MUSCLE, 109, 129, 158, 128, Map.of("topspeed", 6));
     }
 }
