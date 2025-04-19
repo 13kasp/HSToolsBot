@@ -7,6 +7,7 @@ public class SQLTableManager {
                 "discordID TEXT," +
                 "ign TEXT," +
                 "cars TEXT," +
-                "parts TEXT);");
+                "parts TEXT," +
+                "friendLink TEXT);");
     }
 }

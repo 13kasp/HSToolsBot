@@ -1,4 +1,4 @@
-package com.kasp.hstools.command.utilities;
+package com.kasp.hstools.command.commands;
 
 import com.kasp.hstools.EmbedType;
 import com.kasp.hstools.HSTools;
@@ -30,7 +30,7 @@ public class BotStatsCmd implements SlashCommand {
     public void execute(SlashCommandInteractionEvent event) {
         Embed embed = new Embed(EmbedType.DEFAULT, "Bot's Stats", "", 1);
         embed.addField("Servers", "The bot is in `" + HSTools.jda.getGuilds().size() + "` servers", false);
-        embed.addField("Users", "There are `" + HSUserCache.getUsers().size() + "` user registered", false);
+        embed.addField("Users", "There are `" + HSUserCache.getUsers().size() + "` users registered", false);
 
         event.replyEmbeds(embed.build()).setEphemeral(true).queue();
     }

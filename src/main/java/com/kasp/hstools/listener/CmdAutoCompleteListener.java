@@ -12,7 +12,7 @@ public class CmdAutoCompleteListener extends ListenerAdapter {
 
     @Override
     public void onCommandAutoCompleteInteraction(CommandAutoCompleteInteractionEvent event) {
-        if (event.getName().equals("carinfo") && event.getFocusedOption().getName().equals("car")) {
+        if (event.getName().equals("carstats") && event.getFocusedOption().getName().equals("car")) {
             String userInput = event.getFocusedOption().getValue().toLowerCase();
 
             List<Command.Choice> choices = CarCache.getCars().keySet().stream()

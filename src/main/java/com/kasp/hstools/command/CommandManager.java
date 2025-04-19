@@ -1,7 +1,7 @@
 package com.kasp.hstools.command;
 
 import com.kasp.hstools.HSTools;
-import com.kasp.hstools.command.utilities.*;
+import com.kasp.hstools.command.commands.*;
 import com.kasp.hstools.database.SQLUserManager;
 import com.kasp.hstools.instance.HSUser;
 import net.dv8tion.jda.api.JDA;
@@ -25,8 +25,13 @@ public class CommandManager extends ListenerAdapter {
         registerCommand(new LoadCarDataCmd());
         registerCommand(new CarsCmd());
         registerCommand(new SharedCarsCmd());
-        registerCommand(new CarInfoCmd());
+        registerCommand(new CarStatsCmd());
         registerCommand(new BotStatsCmd());
+        registerCommand(new ProfileCmd());
+        registerCommand(new RenameCmd());
+        registerCommand(new SetFriendLink());
+        registerCommand(new InviteCmd());
+        registerCommand(new CarsLBCmd());
         registerCommands(HSTools.jda);
     }
 

@@ -1,4 +1,4 @@
-package com.kasp.hstools.command.utilities;
+package com.kasp.hstools.command.commands;
 
 import com.kasp.hstools.HSTools;
 import com.kasp.hstools.command.SlashCommand;

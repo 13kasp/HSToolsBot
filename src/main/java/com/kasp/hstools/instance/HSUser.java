@@ -15,6 +15,7 @@ public class HSUser {
     private String ign;
     private Map<String, String> cars = new HashMap<>();
     private Map<String, String> parts = new HashMap<>();
+    private String friendLink;
 
     public HSUser(String ID) {
         this.ID = ID;
@@ -38,6 +39,8 @@ public class HSUser {
                     parts.put(s.split("#")[0], s.split("#")[1]);
                 }
             }
+
+            this.friendLink = resultSet.getString(5);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -88,6 +91,10 @@ public class HSUser {
         return parts;
     }
 
+    public String getFriendLink() {
+        return friendLink;
+    }
+
     public void setIgn(String ign) {
         this.ign = ign;
         SQLUserManager.updateIgn(ID);
@@ -101,5 +108,10 @@ public class HSUser {
     public void setParts(Map<String, String> parts) {
         this.parts = parts;
         SQLUserManager.updateParts(ID);
+    }
+
+    public void setFriendLink(String friendLink) {
+        this.friendLink = friendLink;
+        SQLUserManager.updateFriendLink(ID);
     }
 }

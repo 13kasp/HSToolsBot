@@ -1,4 +1,4 @@
-package com.kasp.hstools.command.utilities;
+package com.kasp.hstools.command.commands;
 
 import com.kasp.hstools.EmbedType;
 import com.kasp.hstools.command.SlashCommand;
@@ -82,10 +82,7 @@ public class CarsCmd implements SlashCommand {
                 })
                 .collect(Collectors.joining(","));
 
-        InteractionHook hook = event.replyEmbeds(
-                new EmbedBuilder().setTitle("loading...").build()
-        ).complete();
-
+        InteractionHook hook = event.replyEmbeds(new EmbedBuilder().setTitle("loading...").build()).complete();
         Message embedMsg = hook.retrieveOriginal().complete();
 
         for (int j = 0; j < (double) List.of(data.split(",")).size(); j+=16) {
@@ -106,7 +103,5 @@ public class CarsCmd implements SlashCommand {
 
             Embed.addPage(embedMsg.getId(), reply);
         }
-
-        event.replyEmbeds(new Embed(EmbedType.DEFAULT, user.getIgn() + "'s garage", data, 1).build()).queue();
     }
 }

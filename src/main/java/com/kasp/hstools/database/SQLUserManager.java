@@ -10,22 +10,12 @@ import java.util.StringJoiner;
 public class SQLUserManager {
 
     public static void createUser(String ID, String ign) {
-        SQLite.updateData("INSERT INTO users(discordID, ign, cars, parts)" +
+        SQLite.updateData("INSERT INTO users(discordID, ign, cars, parts, friendLink)" +
                 " VALUES('" + ID + "'," +
                 "'" + ign + "'," +
                 "''," + // cars
-                "'');"); // parts
-    }
-
-    public static int getUsersSize() {
-        ResultSet resultSet = SQLite.queryData("SELECT COUNT(discordID) FROM users");
-        try {
-            return resultSet.getInt(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return 0;
+                "''," + // parts
+                "'-');"); // friendLink
     }
 
     public static boolean isRegistered(String ID) {
@@ -65,5 +55,9 @@ public class SQLUserManager {
         }
 
         SQLite.updateData("UPDATE users SET parts = '" + joiner + "' WHERE discordID='" + ID + "';");
+    }
+
+    public static void updateFriendLink(String ID) {
+        SQLite.updateData("UPDATE users SET friendLink = '" + HSUserCache.getUser(ID).getFriendLink() + "' WHERE discordID='" + ID + "';");
     }
 }

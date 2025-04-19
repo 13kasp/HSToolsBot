@@ -69,5 +69,15 @@ public class Emojis {
         emojis.put("agent", "<:agent:1362467713674514543>");
         emojis.put("ace", "<:ace:1362467696129609849>");
         emojis.put("tofu", "<:tofu:1362497262168834279>");
+        emojis.put("stats_all", "<:stats_all:1362815515495632919>");
+        emojis.put("stats_earlyacc", "<:stats_earlyacc:1362815483350614206>");
+        emojis.put("stats_midacc", "<:stats_midacc:1362815455026221170>");
+        emojis.put("stats_topspeed", "<:stats_topspeed:1362815424374505492>");
+        emojis.put("stats_handling", "<:stats_handling:1362815464757264454>");
+        emojis.put("stats_drift", "<:stats_drift:1362815507279122492>");
+        emojis.put("stats_grip", "<:stats_grip:1362815474416615685>");
+        emojis.put("stats_offroad", "<:stats_offroad:1362815443546538285>");
+        emojis.put("stats_boostdur", "<:stats_boostdur:1362815497359462702>");
+        emojis.put("stats_booststr", "<:stats_booststr:1362815434440704150>");
     }
 }

@@ -1,4 +1,4 @@
-package com.kasp.hstools.command.utilities;
+package com.kasp.hstools.command.commands;
 
 import com.kasp.hstools.command.SlashCommand;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -15,7 +15,7 @@ public class Random4DigitCmd implements SlashCommand {
 
     @Override
     public String getDescription() {
-        return "Generates a random 4 digit number";
+        return "Generates a random 4 digit number (used for tourneys ignore ts)";
     }
 
     @Override

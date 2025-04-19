@@ -23,18 +23,19 @@ public class Car {
 
     private final Map<String, Integer> skinBonus;
 
-    public Car(String name, CarType carType, int EarlyAcc, int midAcc, int topSpeed, int handling, int drift, int grip, int offroad, int boostDur, int boostStr, Map<String, Integer> skinBonus) {
+    public Car(String name, CarType carType, int EarlyAcc, int midAcc, int topSpeed, int handling, Map<String, Integer> skinBonus) {
         this.name = name;
         this.carType = carType;
         this.earlyAcc = EarlyAcc;
         this.midAcc = midAcc;
         this.topSpeed = topSpeed;
         this.handling = handling;
-        this.drift = drift;
-        this.grip = grip;
-        this.offroad = offroad;
-        this.boostDur = boostDur;
-        this.boostStr = boostStr;
+        this.drift = carType == CarType.STREET ? 15 : 10;
+        this.grip = carType == CarType.SUPER ? 15 : 10;
+        this.offroad = carType == CarType.SUV ? 15 : 10;
+        this.boostDur = 10;
+        this.boostStr = carType == CarType.MUSCLE ? 15 : 10;
+        ;
         this.skinBonus = skinBonus;
 
         CarCache.initializeCar(this);
@@ -49,31 +50,77 @@ public class Car {
             case "handling" -> statistic = "Handling";
             default -> statistic = "unknown";
         }
-        
+
         return skinBonus.values().stream().findFirst().get() + "% " + statistic;
     }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
-    public CarType getCarType() { return carType; }
+    public String getNameFormatted() {
+        return (name.substring(0, 1).toUpperCase() + name.substring(1)).replaceAll("_", " ");
+    }
 
-    public int getEarlyAcc() { return earlyAcc; }
+    public CarType getCarType() {
+        return carType;
+    }
 
-    public int getMidAcc() { return midAcc; }
+    public int getEarlyAcc() {
+        return earlyAcc;
+    }
 
-    public int getTopSpeed() { return topSpeed; }
+    public int getMidAcc() {
+        return midAcc;
+    }
 
-    public int getHandling() { return handling; }
+    public int getTopSpeed() {
+        return topSpeed;
+    }
 
-    public int getDrift() { return drift; }
+    public int getHandling() {
+        return handling;
+    }
 
-    public int getGrip() { return grip; }
+    public int getDrift() {
+        return drift;
+    }
 
-    public int getOffroad() { return offroad; }
+    public int getGrip() {
+        return grip;
+    }
 
-    public int getBoostDur() { return boostDur; }
+    public int getOffroad() {
+        return offroad;
+    }
 
-    public int getBoostStr() { return boostStr; }
+    public int getBoostDur() {
+        return boostDur;
+    }
 
-    public Map<String, Integer> getSkinBonus() { return skinBonus; }
+    public int getBoostStr() {
+        return boostStr;
+    }
+
+    public Map<String, Integer> getSkinBonus() {
+        return skinBonus;
+    }
+
+    // for upgrades
+
+    public int getEarlyAcc(int level, boolean skinBonus) {
+        return (earlyAcc + 5 * level - 1) * (skinBonus ? this.skinBonus.keySet().stream().findFirst().equals("earlyacc") ? (1 + this.skinBonus.get("earlyacc") / 100) : 1 : 1);
+    }
+
+    public int getMidAcc(int level, boolean skinBonus) {
+        return (midAcc + 5 * level - 1) * (skinBonus ? this.skinBonus.keySet().stream().findFirst().equals("midacc") ? (1 + this.skinBonus.get("midacc") / 100) : 1 : 1);
+    }
+
+    public int getTopSpeed(int level, boolean skinBonus) {
+        return (topSpeed + 5 * level - 1) * (skinBonus ? this.skinBonus.keySet().stream().findFirst().equals("topspeed") ? (1 + this.skinBonus.get("topspeed") / 100) : 1 : 1);
+    }
+
+    public int getHandling(int level, boolean skinBonus) {
+        return (handling + 5 * level - 1) * (skinBonus ? this.skinBonus.keySet().stream().findFirst().equals("handling") ? (1 + this.skinBonus.get("handling") / 100) : 1 : 1);
+    }
 }

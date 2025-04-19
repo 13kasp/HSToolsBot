@@ -1,4 +1,4 @@
-package com.kasp.hstools.command.utilities;
+package com.kasp.hstools.command.commands;
 
 import com.kasp.hstools.command.SlashCommand;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -17,7 +17,7 @@ public class RandomCmd implements SlashCommand {
 
     @Override
     public String getDescription() {
-        return "Get random numbers from list";
+        return "Get random numbers from list (used for tourneys ignore ts)";
     }
 
     @Override
