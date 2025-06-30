@@ -37,7 +37,7 @@ public class CarStatsCmd implements SlashCommand {
         int carLevel = event.getOption("level").getAsInt();
 
         if (CarCache.getCar(carOption) == null) {
-            event.replyEmbeds(new Embed(EmbedType.ERROR, "Car not found", "Car `" + carOption + "` not found\nThere's a high chance this car is not set up in this bot yet since this is a new feature", 1).build()).setEphemeral(true).queue();
+            event.replyEmbeds(new Embed(EmbedType.ERROR, "Car not found", "Car `" + carOption + "` not found", 1).build()).setEphemeral(true).queue();
             return;
         }
 

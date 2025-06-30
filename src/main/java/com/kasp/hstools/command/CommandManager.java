@@ -32,6 +32,9 @@ public class CommandManager extends ListenerAdapter {
         registerCommand(new SetFriendLink());
         registerCommand(new InviteCmd());
         registerCommand(new CarsLBCmd());
+        registerCommand(new CarCompareCmd());
+        registerCommand(new HelpCmd());
+        registerCommand(new LiveriesCmd());
         registerCommands(HSTools.jda);
     }
 
@@ -69,12 +72,16 @@ public class CommandManager extends ListenerAdapter {
 
             System.out.println(String.format("[%s] %s used /%s | Options: %s",
                     time,
-                    member.getUser().getAsTag(),
+                    member.getUser().getAsTag().replaceAll("#0000", ""),
                     command.getName(),
                     options
             ));
 
             command.execute(event);
         }
+    }
+
+    public Map<String, SlashCommand> getAllCommands() {
+        return commands;
     }
 }

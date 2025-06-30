@@ -8,6 +8,8 @@ import com.kasp.hstools.instance.cache.HSUserCache;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +32,9 @@ public class SetupCarsCmd implements SlashCommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
-        Embed embed = new Embed(EmbedType.DEFAULT, "Website Link", "# https://hstools.vercel.app/\nfollow the instructions on the website to complete setting up your garage",1);
+
+        String desc = "## https://hstools.vercel.app/carsetup/\nfollow the instructions on the website to complete setting up your garage";
+        Embed embed = new Embed(EmbedType.DEFAULT, "Website Link", desc,1);
 
         if (HSUserCache.getUser(event.getMember().getId()) != null) {
             HSUser user = HSUserCache.getUser(event.getMember().getId());
@@ -42,8 +46,11 @@ public class SetupCarsCmd implements SlashCommand {
                 }
 
                 String carsString = String.join(",", carsList);
+                String encodedCars = URLEncoder.encode(carsString, StandardCharsets.UTF_8);
 
-                embed.addField("Existing Cars", "I've noticed you already have some cars set up, paste this text in the bottom of the website to modify your existing garage: ```" + carsString + "```", false);
+                desc += "\n\n**Existing Cars**\nI've noticed you already have some cars set up\n[Click Here to edit your existing garage](https://hstools.vercel.app/carsetup?data=" + encodedCars + ")";
+                embed.setDescription(desc);
+
                 event.replyEmbeds(embed.build()).setEphemeral(true).queue();
                 return;
             }

@@ -1,10 +1,10 @@
 package com.kasp.hstools.database;
 
-import java.io.File;
-import java.io.IOException;
+import com.kasp.hstools.config.Config;
+
 import java.sql.*;
 
-public class SQLite {
+public class ExternalDB {
 
     private static Connection connection;
     private static Statement statement;
@@ -12,17 +12,16 @@ public class SQLite {
     public static void connect() {
         connection = null;
         try {
-            File file = new File("data.db");
-            if (!file.exists()) {
-                file.createNewFile();
-            }
+            String host = Config.getValue("db_host");
+            String port = Config.getValue("db_port");
+            String user = Config.getValue("db_user");
+            String pass = Config.getValue("db_pass");
+            String url = "jdbc:mysql://" + host + ":" + port + "/s170786_liveries";
 
-            String link = "jdbc:sqlite:" + file.getPath();
-
-            connection = DriverManager.getConnection(link);
+            connection = DriverManager.getConnection(url, user, pass);
             statement = connection.createStatement();
-            System.out.println("[SQLite] Successfully connected to the database");
-        } catch (IOException | SQLException e) {
+            System.out.println("[EDB] Successfully connected to the database");
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -37,17 +36,14 @@ public class SQLite {
         }
     }
 
-    public static ResultSet updateData(String sql) {
+    public static void updateData(String sql) {
         if (statement != null) {
             try {
                 statement.execute(sql);
-
-                return statement.getGeneratedKeys();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        return null;
     }
 
     public static ResultSet queryData(String sql) {

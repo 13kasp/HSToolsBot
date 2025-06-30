@@ -3,6 +3,7 @@ package com.kasp.hstools.instance;
 import com.kasp.hstools.CarType;
 import com.kasp.hstools.instance.cache.CarCache;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Car {
@@ -21,9 +22,9 @@ public class Car {
     private final int boostDur;
     private final int boostStr;
 
-    private final Map<String, Integer> skinBonus;
+    private Map<String, Integer> skinBonus = new HashMap<>();
 
-    public Car(String name, CarType carType, int EarlyAcc, int midAcc, int topSpeed, int handling, Map<String, Integer> skinBonus) {
+    public Car(String name, CarType carType, int EarlyAcc, int midAcc, int topSpeed, int handling) {
         this.name = name;
         this.carType = carType;
         this.earlyAcc = EarlyAcc;
@@ -35,8 +36,12 @@ public class Car {
         this.offroad = carType == CarType.SUV ? 15 : 10;
         this.boostDur = 10;
         this.boostStr = carType == CarType.MUSCLE ? 15 : 10;
-        ;
-        this.skinBonus = skinBonus;
+        switch (carType) {
+            case STREET -> skinBonus = Map.of("midacc", 6);
+            case SUPER -> skinBonus = Map.of("handling", 6);
+            case SUV -> skinBonus = Map.of("earlyacc", 6);
+            case MUSCLE -> skinBonus = Map.of("topspeed", 6);
+        }
 
         CarCache.initializeCar(this);
     }
@@ -109,18 +114,25 @@ public class Car {
     // for upgrades
 
     public int getEarlyAcc(int level, boolean skinBonus) {
-        return (earlyAcc + 5 * level - 1) * (skinBonus ? this.skinBonus.keySet().stream().findFirst().equals("earlyacc") ? (1 + this.skinBonus.get("earlyacc") / 100) : 1 : 1);
+        return getStat("earlyacc", earlyAcc, level, skinBonus);
     }
 
     public int getMidAcc(int level, boolean skinBonus) {
-        return (midAcc + 5 * level - 1) * (skinBonus ? this.skinBonus.keySet().stream().findFirst().equals("midacc") ? (1 + this.skinBonus.get("midacc") / 100) : 1 : 1);
+        return getStat("midacc", midAcc, level, skinBonus);
     }
 
     public int getTopSpeed(int level, boolean skinBonus) {
-        return (topSpeed + 5 * level - 1) * (skinBonus ? this.skinBonus.keySet().stream().findFirst().equals("topspeed") ? (1 + this.skinBonus.get("topspeed") / 100) : 1 : 1);
+        return getStat("topspeed", topSpeed, level, skinBonus);
     }
 
     public int getHandling(int level, boolean skinBonus) {
-        return (handling + 5 * level - 1) * (skinBonus ? this.skinBonus.keySet().stream().findFirst().equals("handling") ? (1 + this.skinBonus.get("handling") / 100) : 1 : 1);
+        return getStat("handling", handling, level, skinBonus);
+    }
+
+    private int getStat(String statName, int baseValue, int level, boolean skinBonus) {
+        double bonus = (skinBonus && this.skinBonus.containsKey(statName))
+                ? (1 + this.skinBonus.get(statName) / 100.0)
+                : 1;
+        return (int) ((baseValue + 5 * level - 1) * bonus);
     }
 }

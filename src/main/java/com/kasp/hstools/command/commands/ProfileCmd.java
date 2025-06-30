@@ -11,6 +11,8 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ProfileCmd implements SlashCommand {
     @Override
@@ -69,10 +71,23 @@ public class ProfileCmd implements SlashCommand {
 
         embed.addField("Cars", carsFieldValue, false);
 
-        if (user.getFriendLink() != null && !user.getFriendLink().trim().isEmpty() && !user.getFriendLink().trim().equals("-")) {
-            embed.addField("Friend Link", "[" + user.getIgn() + "'s friend link (click here)" + "](" + user.getFriendLink() + ")", false);
+        if (user.getFriendLink() != null && !extractLink(user.getFriendLink().trim()).isEmpty() && !extractLink(user.getFriendLink().trim()).equals("-")) {
+            embed.addField("Friend Link", "[" + user.getIgn() + "'s friend link (click here)" + "](" + extractLink(user.getFriendLink()) + ")", false);
         }
 
         event.replyEmbeds(embed.build()).queue();
     }
+
+    private String extractLink(String text) {
+        String urlRegex = "(https?://\\S+)";
+        Pattern pattern = Pattern.compile(urlRegex);
+        Matcher matcher = pattern.matcher(text);
+
+        if (matcher.find()) {
+            return matcher.group(1);
+        } else {
+            return "-";
+        }
+    }
+
 }

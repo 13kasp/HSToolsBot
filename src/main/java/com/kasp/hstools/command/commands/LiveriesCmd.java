@@ -8,15 +8,15 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
 import java.util.List;
 
-public class InviteCmd implements SlashCommand {
+public class LiveriesCmd implements SlashCommand {
     @Override
     public String getName() {
-        return "invite";
+        return "liveries";
     }
 
     @Override
     public String getDescription() {
-        return "Get the link to invite this bot to your own server";
+        return "Get the link to browse all community liveries easily";
     }
 
     @Override
@@ -26,6 +26,6 @@ public class InviteCmd implements SlashCommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
-        event.replyEmbeds(new Embed(EmbedType.DEFAULT, "Invite Link", "*NOTE: All data is shared across servers*\n\n[Click here to add this bot to your server!](https://discord.com/oauth2/authorize?client_id=1362136845273534524)", 1).build()).setEphemeral(true).queue();
+        event.replyEmbeds(new Embed(EmbedType.DEFAULT, "Community Liveries", "*NOTE: All liveries are automatically loaded from the [HotSlide Discord Server](https://discord.gg/UcYUBNtyMU)*\n# https://hstools.vercel.app/liveries", 1).build()).setEphemeral(true).queue();
     }
 }

@@ -79,5 +79,9 @@ public class Emojis {
         emojis.put("stats_offroad", "<:stats_offroad:1362815443546538285>");
         emojis.put("stats_boostdur", "<:stats_boostdur:1362815497359462702>");
         emojis.put("stats_booststr", "<:stats_booststr:1362815434440704150>");
+        emojis.put("upgrade", "<:upgrade:1363198976127406431>");
+        emojis.put("downgrade", "<:downgrade:1363198960877047970>");
+        emojis.put("quantum", "<:quantum:1375512310315225221>");
+        emojis.put("samurai", "<:samurai:1383733774038339724>");
     }
 }
